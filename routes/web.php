@@ -16,4 +16,12 @@ use App\Http\Controllers\IndexController;
 
 Route::controller(IndexController::class)->group(function () {
    Route::get('/', 'home')->name('home');
+   Route::get('/profile', 'profile')->name('profile');
+   Route::get('/cart', 'cart')->name('cart');
+   Route::get('/login', 'login')->name('login');
+   Route::get('/reg', 'reg')->name('reg');
+   Route::get('/admin', 'admin')->name('admin');
+   Route::get('/admin/tovars', 'admin_tovars')->name('admin_tovars');
+   Route::get('/add', 'add')->name('add');
+   Route::get('/edit', 'edit')->name('edit');
 });

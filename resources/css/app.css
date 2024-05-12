@@ -7,3 +7,20 @@
         @apply max-w-xl;
     }
 }
+
+body{
+    background: #161719;
+    font-family: 'Neucha';
+}
+
+.font-neucha {
+    font-family: 'Neucha', sans-serif;
+}
+
+.menu.active{
+    transform: translateX(0);
+}
+
+.burger.active{
+    direction: none;
+}
