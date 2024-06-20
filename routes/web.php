@@ -4,6 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ReviewController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,7 +32,7 @@ Route::controller(UserController::class)->middleware('auth')->group(function () 
     Route::post('/profile', 'changePersonalInfo')->name('change');
 });
 
-Route::controller(\App\Http\Controllers\CartController::class)->prefix('cart')->name('cart.')->group(function () {
+Route::controller(CartController::class)->prefix('cart')->name('cart.')->group(function () {
     Route::get('/', 'index')->name('index');
     Route::post('/products/{product}', 'store')->name('store');
     Route::delete('/products/{product}', 'destroy')->name('destroy');
@@ -38,8 +41,11 @@ Route::controller(\App\Http\Controllers\CartController::class)->prefix('cart')->
     Route::post('/', 'checkout')->name('checkout');
 });
 
-Route::controller(\App\Http\Controllers\AdminController::class)->middleware('admin')->prefix('admin')->name('admin.')->group(function () {
+Route::controller(AdminController::class)->middleware('admin')->prefix('admin')->name('admin.')->group(function () {
     Route::get('/', 'index')->name('index');
+    Route::get('/statistics', 'statistics')->name('statistics');
+    Route::get('/reviews', 'reviews')->name('reviews');
+    Route::post('/reviews/{review}/switch', 'switch')->name('reviews.switch');
     Route::get('/products', 'products')->name('products.index');
     Route::post('/products', 'store')->name('products.store');
     Route::get('/products/create', 'create')->name('products.create');
@@ -49,6 +55,13 @@ Route::controller(\App\Http\Controllers\AdminController::class)->middleware('adm
     Route::post('/carts/{cart}/accept', 'accept')->name('carts.accept');
 });
 
+Route::controller(ReviewController::class)->prefix('reviews')->name('reviews.')->group(function () {
+    Route::get('/', 'index')->name('index');
+    Route::get('/create', 'create')->name('create');
+    Route::post('/', 'store')->name('store');
+});
+
 Route::controller(IndexController::class)->group(function () {
    Route::get('/', 'home')->name('home');
+
 });

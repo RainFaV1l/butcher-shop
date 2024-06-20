@@ -9,7 +9,7 @@ class IndexController extends Controller
 {
     public function home()
     {
-        $products = Product::query()->where('in_stock', true)->get();
+        $products = Product::query()->get();
 
         return view('index.home', compact('products'));
     }

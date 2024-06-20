@@ -8,9 +8,9 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neucha&display=swap">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon.png') }}">
     <title>{{ $title ?? 'Мясная Долина' }}</title>
-    <link rel="stylesheet" href="{{ asset('build/assets/app-Cy5JjQrf.css') }}">
-    <script src="{{ asset('build/assets/app-CrG2wnyX.js') }}" defer></script>
-{{--    @vite(['resources/css/app.css', 'resources/js/app.js'])--}}
+{{--    <link rel="stylesheet" href="{{ asset('build/assets/app-Cy5JjQrf.css') }}">--}}
+{{--    <script src="{{ asset('build/assets/app-CrG2wnyX.js') }}" defer></script>--}}
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="h-full">
     <x-menu />

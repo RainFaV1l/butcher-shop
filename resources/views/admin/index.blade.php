@@ -2,8 +2,22 @@
     <x-layout-nohome>
         <x-header-nohome name="Панель администратора" btn="Управление товарами" routeName="admin.products.index"/>
         <div class="flex flex-col gap-[50px] py-[50px]">
+            <div class="flex flex-wrap items-center gap-[30px]">
+                <a href="{{ asset(route('admin.statistics')) }}"
+                   class="bg-[#DC272C] py-[14px] px-[50px] text-white text-[16px] button">Статистика</a>
+                <a href="{{ asset(route('admin.reviews')) }}"
+                   class="bg-[#DC272C] py-[14px] px-[50px] text-white text-[16px] button">Отзывы</a>
+            </div>
+            <div class="flex flex-wrap items-center gap-[30px]">
+                <a href="{{ asset(route('admin.index')) }}"
+                   class="border border-white py-[14px] px-[50px] text-white text-[16px] button {{ is_null(request('status')) ? 'bg-[#DC272C]' : '' }}">Все</a>
+                @foreach($statuses as $status)
+                    <a href="{{ asset(route('admin.index')) . '?status=' . $status }}"
+                       class="border border-white py-[14px] px-[50px] text-white text-[16px] button {{ $status === request('status') ? 'bg-[#DC272C]' : '' }}">{{ $status }}</a>
+                @endforeach
+            </div>
             <div class="flex flex-col gap-[30px] items-end">
-                @foreach($carts as $cart)
+                @forelse($carts as $cart)
                     <x-order :cart="$cart"/>
                     <x-form action="{{ route('admin.carts.accept', $cart->id) }}" class="flex flex-wrap items-end gap-[30px]">
                         <div class="flex flex-col gap-[5px]">
@@ -24,7 +38,9 @@
                             Применить
                         </button>
                     </x-form>
-                @endforeach
+                @empty
+                    <p class="text-white flex justify-start w-full text-xl">К сожалению, в данный момент нет заказов</p>
+                @endforelse
             </div>
         </div>
     </x-layout-nohome>

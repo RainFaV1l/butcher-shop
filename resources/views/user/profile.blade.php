@@ -26,6 +26,14 @@
     </x-layout-nohome>
     <x-layout-nohome>
         <x-header-block h1="История заказов" h3="Список ваших заявок"/>
+        <div class="flex flex-wrap items-center justify-center gap-[30px] mt-[30px]">
+            <a href="{{ asset(route('profile')) }}"
+               class="border border-white py-[14px] px-[50px] text-white text-[16px] button {{ is_null(request('status')) ? 'bg-[#DC272C]' : '' }}">Все</a>
+            @foreach($statuses as $status)
+                <a href="{{ asset(route('profile')) . '?status=' . $status }}"
+                   class="border border-white py-[14px] px-[50px] text-white text-[16px] button {{ $status === request('status') ? 'bg-[#DC272C]' : '' }}">{{ $status }}</a>
+            @endforeach
+        </div>
         <div class="py-[50px] flex flex-col gap-[30px]">
             @forelse($carts as $cart)
                 <x-order :cart="$cart" />

@@ -13,6 +13,8 @@
     <nav class="hidden 700:flex gap-[30px] text-white items-center font-neucha text-[18px]">
         <a href="{{ route('home') }}#catalog">Каталог</a>
         <a href="{{ route('home') }}#contacts">Контакты</a>
+        <a href="{{ route('home') }}#about">О нас</a>
+        <a href="{{ route('reviews.index') }}">Отзывы</a>
         @if(auth()->user() && auth()->user()->isAdmin())
             <a href="{{ route('admin.index') }}">Админка</a>
         @endif

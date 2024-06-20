@@ -9,9 +9,20 @@ class UserController extends Controller
 {
     public function profile()
     {
-        $carts = Cart::query()->where('user_id', auth()->id())->orderByDesc('created_at')->get();
+        $query = Cart::query()->where('user_id', auth()->id())->orderByDesc('created_at');
 
-        return view('user.profile', compact('carts'));
+        if(request()->filled('status')) $query->where('status', request('status'));
+
+        $carts = $query->get();
+
+        $statuses = collect([
+            'Отклонен',
+            'Оформлен',
+            'В доставке',
+            'Доставлен',
+        ]);
+
+        return view('user.profile', compact('carts', 'statuses'));
     }
 
     public function changePersonalInfo(ChangePersonalInfoRequest $request)
